@@ -1,11 +1,10 @@
-import 'dart:js';
 
 class LinkedList {
-  Node head = Node();
+  Node head = Node<Null>();
   int size = 0;
 
-  void add(data){
-    Node newNode = Node();
+  void add<T>(data){
+    Node newNode = Node<T>();
     var node = getTail(this.head);
 
     newNode.data = data;
@@ -31,8 +30,9 @@ class LinkedList {
     }
   }
 
-  JsArray toArray(){
-    List<dynamic> list = [];
+  List toArray<T>(){
+    List<T> list = [];
+    
     var nowNode = this.head;
 
     while(nowNode.next != null){
@@ -45,8 +45,8 @@ class LinkedList {
 
 }
 
-class Node {
+class Node<T> {
   Node prev;
   Node next;
-  var data;
+  T data;
 }
