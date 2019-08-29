@@ -1,4 +1,4 @@
-import 'dart:html' show Element, querySelector;
+import 'dart:html';
 import 'linkedList.dart';
 import 'static.dart';
 
@@ -8,12 +8,16 @@ void main() {
 
   print(Point.getDistance(a, b));
 
-
   LinkedList linkedList = LinkedList();
   Element target = querySelector('#target');
+  int number = 0;
 
   add(e){
-    Element div = Element.html('<div></div>');
+    number++;
+    Element div = Element.html('<div>${number}</div>');
+    div.onClick.listen((e){
+      div.remove();
+    });
     linkedList.add<Element>(div);
   }
 
@@ -23,9 +27,10 @@ void main() {
 
   toArray(e){
     List<Element> array = linkedList.toArray<Element>();
+    print('array : ${array}');
 
     array.forEach((item)=>{
-      target.append(item..text = 'test')
+      target.append(item)
     });
 
   }
