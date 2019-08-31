@@ -1,7 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutters/theme/style.dart';
-import 'package:flutters/screens/example1/examplescreen1.dart';
-import 'package:flutters/screens/example2/examplescreen2.dart';
+import 'BottomNaviController.dart';
 
 void main(){
   runApp(NacaApp());
@@ -10,17 +10,23 @@ void main(){
 class NacaApp extends StatelessWidget {
   @override
   Widget build(BuildContext context){
-    return Material(
-      // 열(Column)은 수직 선형 레이아웃임 
-      child: Column (
-        children: <Widget>[
-          Expanded(
-            child: Center(
-              child: Text('Hello, world!', textDirection: TextDirection.ltr),
-            ),
+    return MaterialApp(
+      title:'nacas',
+      theme: appTheme(),
+      home:Scaffold(
+        body: Center(
+          child:Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+                Text(
+                  'hellow', textDirection: TextDirection.ltr
+                ),
+            ],
           ),
-        ],
-      ),
+        ),
+        bottomNavigationBar:BottomNaviController()
+      )
     );
   }
 }
