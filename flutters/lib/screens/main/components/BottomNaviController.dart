@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'FirstPage.dart';
-import 'SecondPage.dart';
-import 'ThirdPage.dart';
-import 'FourthPage.dart';
+import '../FirstPage.dart';
+import '../SecondPage.dart';
+import '../ThirdPage.dart';
+import '../FourthPage.dart';
 
 class BottomNaviController extends StatefulWidget {
   @override

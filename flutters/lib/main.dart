@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutters/theme/style.dart';
-import 'BottomNaviController.dart';
+import 'package:flutters/screens/main/mainScreen.dart';
 
 void main(){
   runApp(NacaApp());
@@ -13,20 +13,24 @@ class NacaApp extends StatelessWidget {
     return MaterialApp(
       title:'nacas',
       theme: appTheme(),
-      home:Scaffold(
-        body: Center(
-          child:Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-                Text(
-                  'hellow', textDirection: TextDirection.ltr
-                ),
-            ],
-          ),
-        ),
-        bottomNavigationBar:BottomNaviController()
-      )
+      initialRoute: '/',
+      routes: <String, WidgetBuilder>{
+        "/" : (BuildContext context) => MainScreen(),
+      },
+      // home:Scaffold(
+      //   body: Center(
+      //     child:Column(
+      //       crossAxisAlignment: CrossAxisAlignment.center,
+      //       mainAxisAlignment: MainAxisAlignment.center,
+      //       children: <Widget>[
+      //           Text(
+      //             'hellow', textDirection: TextDirection.ltr
+      //           ),
+      //       ],
+      //     ),
+      //   ),
+      //   bottomNavigationBar:BottomNaviController()
+      // )
     );
   }
 }
