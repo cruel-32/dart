@@ -1,17 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
 import 'HomeScreen/index.dart';
 import 'EventsScreen/index.dart';
 import 'MembersScreen/index.dart';
 import 'DashboardScreen/index.dart';
 
-class BottomNaviController extends StatefulWidget {
-  @override
-  _BottomNaviControllerState createState()=>_BottomNaviControllerState();
-}
+import '../provider/mainProv.dart';
 
-class _BottomNaviControllerState extends State<BottomNaviController> {
-  int _selectedIndex = 0;
-
+class BottomNaviController extends StatelessWidget {
   final List<Widget> pages = [
     HomeScreen(
       key: PageStorageKey('Home'),
@@ -27,43 +24,41 @@ class _BottomNaviControllerState extends State<BottomNaviController> {
     ),
   ];
 
-  PageStorageBucket bucket = PageStorageBucket();
-
-  void setIndex(int index){
-    setState(()=> _selectedIndex = index);
-  }
-
-  Widget _bottomNavigationBar(int selectedIndex) => BottomNavigationBar(
-    onTap: (int index)=> setIndex(index),
-    currentIndex: selectedIndex,
-    items: const <BottomNavigationBarItem>[
-      BottomNavigationBarItem(
-        icon: Icon(Icons.home),
-        title: Text('Home'),
-      ),
-      BottomNavigationBarItem(
-        icon: Icon(Icons.calendar_today),
-        title: Text('Events'),
-      ),
-      BottomNavigationBarItem(
-        icon: Icon(Icons.people),
-        title: Text('Members'),
-      ),
-      BottomNavigationBarItem(
-        icon: Icon(Icons.insert_chart),
-        title: Text('Dashboard'),
-      ),
-    ]
-  );
-
   @override
   Widget build(BuildContext context){
+    final mainIndex = Provider.of<MainIndex>(context);
+    print('mainIndex.getIndex() -> ${mainIndex.getIndex()}');
+    PageStorageBucket bucket = PageStorageBucket();
+
     return Scaffold(
       body:PageStorage(
-        child: pages[_selectedIndex],
+        child: pages[mainIndex.getIndex()],
         bucket: bucket,
       ),
-      bottomNavigationBar: _bottomNavigationBar(_selectedIndex),
+      // bottomNavigationBar: _bottomNavigationBar(_selectedIndex),
+      bottomNavigationBar: BottomNavigationBar(
+        // onTap: (int index)=> setIndex(index),
+        onTap:(int index) => mainIndex.setIndex(index),
+        currentIndex: mainIndex.getIndex(),
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            title: Text('Home'),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.calendar_today),
+            title: Text('Events'),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.people),
+            title: Text('Members'),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.insert_chart),
+            title: Text('Dashboard'),
+          ),
+        ]
+      ),
     );
   }
 }

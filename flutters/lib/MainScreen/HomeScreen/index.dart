@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
 import 'dart:math';
 
 // import '../bottomNavi.dart' show pages;
+
+import '../../provider/mainProv.dart';
+
 
 class HomeScreen extends StatelessWidget {
   final List<LinkItem> linkItems = <LinkItem>[
@@ -15,6 +20,8 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context){
+    final mainIndex = Provider.of<MainIndex>(context);
+
     return Scaffold(
       body: Center(
         child: ListView.builder(
@@ -24,7 +31,7 @@ class HomeScreen extends StatelessWidget {
               title: Text(linkItems[index].title),
               onTap: () {
                 print('index: $index random: ${Random().nextInt(10)}  context: $context');
-                
+                mainIndex.setIndex(linkItems[index].index);
               },
             );
           },
