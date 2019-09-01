@@ -1,38 +1,40 @@
 import 'package:flutter/material.dart';
-import '../FirstPage.dart';
-import '../SecondPage.dart';
-import '../ThirdPage.dart';
-import '../FourthPage.dart';
+import 'HomeScreen/index.dart';
+import 'EventsScreen/index.dart';
+import 'MembersScreen/index.dart';
+import 'DashboardScreen/index.dart';
 
 class BottomNaviController extends StatefulWidget {
   @override
   _BottomNaviControllerState createState()=>_BottomNaviControllerState();
-
 }
 
 class _BottomNaviControllerState extends State<BottomNaviController> {
+  int _selectedIndex = 0;
+
   final List<Widget> pages = [
-    FirstPage(
-      key: PageStorageKey('Page1'),
+    HomeScreen(
+      key: PageStorageKey('Home'),
     ),
-    SecondPage(
-      key: PageStorageKey('Page2'),
+    EventsScreen(
+      key: PageStorageKey('Events'),
     ),
-    ThirdPage(
-      key: PageStorageKey('Page3'),
+    MembersScreen(
+      key: PageStorageKey('Members'),
     ),
-    FourthPage(
-      key: PageStorageKey('Page4'),
+    DashboardScreen(
+      key: PageStorageKey('Dashboard'),
     ),
   ];
 
   PageStorageBucket bucket = PageStorageBucket();
 
-  int _selectedIndex = 0;
-
+  void setIndex(int index){
+    setState(()=> _selectedIndex = index);
+  }
 
   Widget _bottomNavigationBar(int selectedIndex) => BottomNavigationBar(
-    onTap: (int index)=> setState(()=> _selectedIndex = index),
+    onTap: (int index)=> setIndex(index),
     currentIndex: selectedIndex,
     items: const <BottomNavigationBarItem>[
       BottomNavigationBarItem(
@@ -61,11 +63,7 @@ class _BottomNaviControllerState extends State<BottomNaviController> {
         child: pages[_selectedIndex],
         bucket: bucket,
       ),
-      bottomNavigationBar: new Container(
-        color: Colors.green,
-        child : _bottomNavigationBar(_selectedIndex),
-      ),
+      bottomNavigationBar: _bottomNavigationBar(_selectedIndex),
     );
   }
-
 }
