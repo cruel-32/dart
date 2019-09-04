@@ -30,7 +30,7 @@ class _EventsScreenState extends State<EventsScreen>{
   Widget build(BuildContext context){
     return Scaffold(
       body: Center(
-        child: Text('Events ${key}')
+        child: Text('Events $key')
       )
     );
   }
